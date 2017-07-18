@@ -1,17 +1,19 @@
 buildscript {
     repositories {
         mavenCentral()
+        google()
+        jcenter()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.1'
+        classpath 'com.android.tools.build:gradle:2.3.3'
     }
 }
 
 apply plugin: 'com.android.library'
 
 apply plugin: 'maven'
- 
+
 uploadArchives {
     repositories.mavenDeployer {
         pom.groupId = 'com.uservoice'
@@ -32,12 +34,18 @@ artifacts {
 }
 
 repositories {
-    mavenCentral()
+    jcenter()
+    google()
 }
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion '24.0.3'
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+    }
 
     sourceSets {
         main {
@@ -51,8 +59,9 @@ android {
 
 dependencies {
     // compile 'com.android.support:support-v4:21.+'
-    compile 'com.android.support:support-core-utils:24.2.1'
-    compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.squareup.okhttp:okhttp:2.4.0'
+    compile "com.android.support:support-core-utils:${rootProject.supportLibraryVersion}"
+    compile "com.android.support:appcompat-v7:${rootProject.supportLibraryVersion}"
+    compile "com.android.support:design:${rootProject.supportLibraryVersion}"
+    compile 'com.squareup.okhttp:okhttp:2.7.0'
     compile 'oauth.signpost:signpost-core:1.2.1.2'
 }

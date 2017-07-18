@@ -1,1 +1,17 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+ext {
+    // sdk and tools
+    compileSdkVersion = 25
+    buildToolsVersion = '25.0.2'
+    minSdkVersion = 9
+    targetSdkVersion = 25
+
+    // https://developer.android.com/topic/libraries/support-library/revisions.html
+    supportLibraryVersion = '25.4.0'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.0'
+    distributionUrl = distributionUrl.replace("bin", "all")
+}
